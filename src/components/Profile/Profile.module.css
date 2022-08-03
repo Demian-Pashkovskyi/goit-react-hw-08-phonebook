@@ -1,0 +1,19 @@
+.profile {
+  width: 300px;
+
+  font-family: 'Georgia', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 18px;
+  letter-spacing: 0.2em;
+
+  color: var(--primaryTextColor);
+  background: var(--bgColor);
+
+  cursor: pointer;
+
+  box-shadow: var(--boxShadow);
+  border-radius: 6px;
+
+  transition: transform 300ms var(--timingFn);
+}

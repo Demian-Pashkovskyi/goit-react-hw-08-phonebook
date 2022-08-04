@@ -1,9 +1,8 @@
 import { Profile } from "../components/Profile/Profile";
+import data from "../data/user.json"
 
 export const App = ({ data }) => {
   return (
-    <div>
-			<Profile {...data.user} />
-		</div>
+      <Profile {...data.user} />
   );
-};
+}; 

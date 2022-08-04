@@ -9,12 +9,10 @@
 
   color: var(--primaryTextColor);
   background: var(--bgColor);
-
+	
   cursor: pointer;
-
   box-shadow: var(--boxShadow);
   border-radius: 6px;
-
   transition: transform 300ms var(--timingFn);
 }
 
@@ -38,7 +36,6 @@
   width: 100%;
   height: 200px;
   margin-bottom: 20px;
-
   border-radius: 50%;
 }
 

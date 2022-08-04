@@ -5,7 +5,7 @@ export const Profile = ({ username, tag, location, avatar, stats }) => {
 	return <div className={st.profile}>
   <div className={st.description}>
     <img
-      src="https://cdn-icons-png.flaticon.com/512/1077/1077012.png"
+      src={avatar}
       alt="User avatar"
       className={st.avatar}
     />

@@ -1,5 +1,8 @@
 .profile {
-  width: 300px;
+	display: block;
+  width: 320px;
+	margin: 20px auto;
+	position:relative;
 
   font-family: 'Georgia', sans-serif;
   font-weight: 600;
@@ -7,13 +10,13 @@
   line-height: 18px;
   letter-spacing: 0.2em;
 
-  color: var(--primaryTextColor);
-  background: var(--bgColor);
-	
-  cursor: pointer;
-  box-shadow: var(--boxShadow);
+  color: #008b8b;
+  background: #d1e3ff;
+	cursor: pointer;
+  box-shadow: 5px 5px 10px 3px rgb(75 75 75 / 30%);
+	border: 2px solid #bcafaf;
   border-radius: 6px;
-  transition: transform 300ms var(--timingFn);
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .profile:hover,
@@ -32,10 +35,9 @@
 
 .avatar {
   object-fit: cover;
-
-  width: 100%;
-  height: 200px;
-  margin-bottom: 20px;
+  width: 160px;
+	height: 160px;
+  margin: 30px auto 20px;
   border-radius: 50%;
 }
 
@@ -63,21 +65,25 @@
 
 .stats {
   display: flex;
+	flex-wrap: wrap;
 
   width: 100%;
-  margin: 0;
+	height: 90px;
+	margin: 0;
   padding: 0;
-
   list-style: none;
 }
 
 .stats > li {
   display: flex;
+	flex-wrap: wrap;
   flex-direction: column;
   align-items: center;
+	justify-content: center;
+	width: calc(33.33333%);
 
-  width: 100%;
-  padding: 10px 4px;
+  /* width: 100%; */
+  /* padding: 10px 4px; */
 
   background-color: var(--bgContainerColor);
   border: 1px solid rgba(228, 233, 240);

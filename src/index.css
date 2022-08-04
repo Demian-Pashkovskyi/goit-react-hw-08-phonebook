@@ -1,3 +1,15 @@
+/* @import-normalize; bring in normalize.css styles */
+
+:root {
+  --primaryTextColor: #008b8b;
+  --secondaryTextColor: #000;
+  --bgContainerColor: #f7f7f7;
+  --bgColor: #fff;
+  --boxShadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.12);
+  --timingFn: cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
 * {
   box-sizing: border-box;
   margin: 0;

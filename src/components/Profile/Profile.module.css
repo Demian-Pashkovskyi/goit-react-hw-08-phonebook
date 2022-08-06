@@ -11,11 +11,11 @@
   letter-spacing: 0.2em;
 
   color: #008b8b;
-  background: #d1e3ff;
+  background: #fff;
 	cursor: pointer;
-  box-shadow: 5px 5px 10px 3px rgb(75 75 75 / 30%);
-	border: 2px solid #bcafaf;
-  border-radius: 6px;
+  box-shadow: 3px 3px 10px 3px rgb(75 75 75 / 30%);
+	border: 2px solid #e4e1e1;
+  border-radius: 2px;
   transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -49,7 +49,7 @@
   margin-bottom: 10px;
   padding: 0;
 
-  color: var(--secondaryTextColor);
+  color: #000;
 }
 
 .tag {
@@ -82,12 +82,17 @@
 	justify-content: center;
 	width: calc(33.33333%);
 
-  /* width: 100%; */
-  /* padding: 10px 4px; */
+  padding: 10px 4px;
 
-  background-color: var(--bgContainerColor);
-  border: 1px solid rgba(228, 233, 240);
+  background-color: #e3f6f6f7;
+  border: 1px solid #e2e7f0;
 }
+
+
+	/* .stats > li:not(:last-child) {
+		border-right: 1px solid #e2e7f0;
+} */
+
 
 .label {
   font-size: 14px;

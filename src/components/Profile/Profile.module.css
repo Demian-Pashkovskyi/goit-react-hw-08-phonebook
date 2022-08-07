@@ -83,16 +83,9 @@
 	width: calc(33.33333%);
 
   padding: 10px 4px;
-
   background-color: #e3f6f6f7;
   border: 1px solid #e2e7f0;
 }
-
-
-	/* .stats > li:not(:last-child) {
-		border-right: 1px solid #e2e7f0;
-} */
-
 
 .label {
   font-size: 14px;

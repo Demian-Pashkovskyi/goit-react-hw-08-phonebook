@@ -1,6 +1,8 @@
+
+import  { Section } from "./Section/Section";
 import React, { Component } from "react";
 import  { ContactForm } from "./ContactForm/ContactForm";
-
+import  { FilterContacts } from "./FiltrContacts/FiltrContacts";
 
 class App extends Component {
 	
@@ -16,23 +18,37 @@ class App extends Component {
 		number: '',
 	};
 	
-	formSubmit = data => {
-		console.log(data);
+	AddFormSubmit = contact => {
+		if (
+      this.state.contacts.find(
+        cont => cont.name.toLowerCase() === contact.name.toLowerCase()
+      )
+    ) 
+		{
+      return alert(`${contact.name} is already in contacts`);
+    }
+		this.setState(prevState => ({
+      contacts: [...prevState.contacts, contact]
+    }))
+		console.log(contact.name);
 	};
 
-	// handleNameChange = event => {
-	// 	// console.log(event.currentTarget.value);
-	// 	this.setState({ name: event.currentTarget.value })
-	// };
+	onChangeFilter = event => {
+		const { name, value } = event.currentTarget;
+		this.setState({ [name]: value });
+	};
 
-	// handleNumberChange = event => {
-	// 	// console.log(event.currentTarget.value);
-	// 	this.setState({ number: event.currentTarget.value })
-	// };
-	
 	render() {
 		return (
-			<ContactForm onFormSubmit={this.formSubmit} />
+			<>
+			<Section>
+				<ContactForm AddFormSubmit={this.AddFormSubmit} />
+			</Section>
+			<Section>
+				<FilterContacts onChangeFilter={this.onChangeFilter} />
+			</Section>
+			</>
+			
 		)
 	}	
 }; 

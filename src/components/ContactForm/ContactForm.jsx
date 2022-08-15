@@ -1,11 +1,12 @@
-import PropTypes from 'prop-types';
 import React, { Component } from "react";
 import { nanoid } from "nanoid";
+import { Form, Input, ButtonAdd, LabelForm, Span } from "../ContactForm/ContactFormStyled";
+
 
 export class ContactForm extends Component {
-	static propTypes = {
-    AddFormSubmit: PropTypes.func.isRequired,
-  }; 
+	// static propTypes = {
+  //   AddFormSubmit: PropTypes.func.isRequired,
+  // }; 
 
 	state = {
 		name: '',
@@ -36,10 +37,10 @@ export class ContactForm extends Component {
 
 	render() {
 		return (
-			<form onSubmit={this.onSubmit}>
-				<label htmlFor="name">
-					NAME 
-					<input 
+			<Form onSubmit={this.onSubmit}>
+				<LabelForm htmlFor="name">
+					<Span>Name</Span> 
+					<Input 
 					type="text"
 					name="name"
 					pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -49,10 +50,10 @@ export class ContactForm extends Component {
 					onChange={this.handleChange}
 					id={this.nameId} 
 				/>
-				</label>
-				<label htmlFor="number" >
-					PHONE
-					<input 
+				</LabelForm>
+				<LabelForm htmlFor="number" >
+					<Span>Number</Span>
+					<Input 
 					type="tel" 
 					name="number"
 					pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -62,9 +63,9 @@ export class ContactForm extends Component {
 					onChange={this.handleChange}
 					id={this.numberId} 
 				/>
-				</label>
-				<button type="submit">Add contact</button>
-			</form>
+				</LabelForm>
+				<ButtonAdd type="submit">Add contact</ButtonAdd>
+			</Form>
 		);
 	}
 }

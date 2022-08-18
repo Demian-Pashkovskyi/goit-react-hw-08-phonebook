@@ -1,71 +1,78 @@
-import React, { Component } from "react";
+import { Component } from "react";
+import { Formik, ErrorMessage } from "formik";
 import { nanoid } from "nanoid";
-import { Form, Input, ButtonAdd, LabelForm, Span } from "../ContactForm/ContactFormStyled";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Button } from "../Button/Button";
+import { AddForm, InputForm, Message, LabelForm } from "./ContactFormStyled";
+import propTypes from "prop-types";
 
-
-export class ContactForm extends Component {
-	// static propTypes = {
-  //   AddFormSubmit: PropTypes.func.isRequired,
-  // }; 
-
-	state = {
-		name: '',
-		number: ''
-	}
-
-	userId = nanoid();
-
-	handleChange = event => {
-		const { name, value } = event.currentTarget;
-		this.setState({ [name]: value });
-	};
-
-	onSubmit = event => {
-		event.preventDefault();
-		const contact = {
-				name: this.state.name,
-				number:this.state.number,
-				id: this.userId
-	}
-		this.props.AddFormSubmit(contact)
-			this.reset()
+const initialValues = {
+	name: "",
+	number: "",
 };
 
-	reset = () => {
-    this.setState({ name: '', number: '' });
-  };
+const FormError = ({ name }) => {
+	return (
+		<ErrorMessage
+			name={name}
+			render={(message) => <Message>{message}</Message>}
+		/>
+	);
+};
+
+export class ContactForm extends Component {
+	handleSubmit = ({ name, number }, { resetForm }) => {
+		const nameInContacts = this.props.contacts.find(
+			(contact) => contact.name.toLowerCase() === name.toLowerCase()
+		);
+		if (nameInContacts) {
+			toast.warn(`${name} is already in contacts`);
+			return;
+		}
+		const contact = { id: nanoid(), name, number };
+		this.props.onSubmit(contact);
+		resetForm();
+	};
 
 	render() {
 		return (
-			<Form onSubmit={this.onSubmit}>
-				<LabelForm htmlFor="name">
-					<Span>Name</Span> 
-					<Input 
-					type="text"
-					name="name"
-					pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-  				title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-  				required
-					value={this.state.name} 
-					onChange={this.handleChange}
-					id={this.nameId} 
-				/>
-				</LabelForm>
-				<LabelForm htmlFor="number" >
-					<Span>Number</Span>
-					<Input 
-					type="tel" 
-					name="number"
-					pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-  				title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-  				required
-					value={this.state.number} 
-					onChange={this.handleChange}
-					id={this.numberId} 
-				/>
-				</LabelForm>
-				<ButtonAdd type="submit">Add contact</ButtonAdd>
-			</Form>
+			<Formik initialValues={initialValues} onSubmit={this.handleSubmit}>
+				<AddForm autoComplete="off">
+					<div>
+						<LabelForm htmlFor="name">Name</LabelForm>
+						<div>
+							<InputForm
+								type="text"
+								name="name"
+								pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+								title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+								required
+							/>
+							<FormError name="name" />
+						</div>
+					</div>
+					<div>
+						<LabelForm htmlFor="number">Number</LabelForm>
+						<div>
+							<InputForm
+								type="tel"
+								name="number"
+								pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+								title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+								required
+							/>
+							<FormError name="number" />
+						</div>
+					</div>
+					<Button type="submit" text={"Add contact"} />
+				</AddForm>
+			</Formik>
 		);
 	}
 }
+
+ContactForm.propTypes = {
+	onSubmit: propTypes.func.isRequired,
+	contacts: propTypes.arrayOf(propTypes.object).isRequired,
+};

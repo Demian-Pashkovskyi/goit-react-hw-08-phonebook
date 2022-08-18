@@ -1,47 +1,50 @@
 import styled from '@emotion/styled';
 import { font } from "../Styled/Mixins";
+import { Form, Field } from "formik";
 
 
-export const Form = styled.form`
-  border: 2px solid #e4e1e1;
-  max-width: 400px;
-  padding: 16px;
-	border-radius:6px;
-	
-`;
-
-export const LabelForm = styled.label`
+export const AddForm = styled(Form)`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-  gap: 8px;
-  margin-bottom: 16px;
+	max-width: 400px;
+	height: 240px;
+	padding: 20px;
+	border-radius: 20px;
+	background-color: rgb(227, 227, 238);
+	box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.22), 0px 2px 2px rgba(0, 0, 0, 0.24), 0px 2px 1px rgba(0, 0, 0, 0.32);
 `;
 
-export const Input = styled.input`
-	font-size: 16px;
-	font-weight: 400;
-	line-height: 1.3;	
-	border: 1px solid;
-	border-radius: 5px;
-	padding: 5px;
-`
-export const ButtonAdd = styled.button`
-padding: 5px 20px;
-font-size: 16px;
-font-weight: 600;
-line-height: 1.3;
-height: 30px;
-background-color: white;
-outline: none;
-border: 1px solid;
-border-radius: 5px;
-cursor: pointer;
-:hover {
-    background-color:gainsboro;
-}
-`
-export const Span = styled.label`
+export const LabelForm = styled.label`
+${font({ fs: 16, fw: 700, lh: 20 })};
+display: block;
+margin-bottom: 10px;
+`;
+
+export const InputForm = styled(Field)`
+	border: 0;
+	outline: 0;
+	width: 100%;
+	margin-bottom: 10px;
+	border-radius: 20px;
+	padding: 10px;
+	background-color: #ebedf3;
+	${font({ fs: 16, fw: 400, lh: 20 })};
+	box-shadow: inset 2px 2px 5px #a1a6b8,
+		inset -5px -5px 10px #ffffff;
+	transition: all 0.2s ease-in-out;
+	appearance: none;
+`;
+
+
+export const Message = styled.p`
+	${font({ fs: 14, fw: 400, lh: 16 })};
+	color: #e3f6f6f7;
+	display: block;
+	margin-bottom: 4px;
+`;
+
+export const SpanForm = styled.label`
 ${font({ fs: 16, fw: 700, lh: 20 })};
 	display: block;;
 `;

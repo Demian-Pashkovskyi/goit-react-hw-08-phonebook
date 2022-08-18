@@ -1,22 +1,29 @@
+import { Component } from "react";
+import { FilterInput, FilterWrapper } from "./FiltrContactsStyled";
+import { LabelForm } from "../ContactForm/ContactFormStyled";
+import propTypes from "prop-types";
 
-import PropTypes from 'prop-types';
+export class Filter extends Component {
+	handleChange = ({ target: { value } }) => {
+		this.props.onChange(value);
+	};
 
-export const FilterContacts = ({ onChange, value, onFilter }) => {
-  return (
-		<>
-    <label >
-        <span>Find contacts by name</span>
-        <input
-          type="text"
-          name="filter"
-          value={value}
-          onChange={onChange}
-        />
-    </label>{value && <list>{onFilter()}</list>}
-		</>
-  );
+	render() {
+		return (
+			<FilterWrapper>
+				<LabelForm htmlFor="filter">Find contacts by name</LabelForm>
+				<div>
+					<FilterInput
+						name="filter"
+						type="filter"
+						onChange={this.handleChange}
+					/>
+				</div>
+			</FilterWrapper>
+		);
+	}
 }
 
-FilterContacts.propTypes = {
-  onChange: PropTypes.func.isRequired,
+Filter.propTypes = {
+	onChange: propTypes.func.isRequired,
 };

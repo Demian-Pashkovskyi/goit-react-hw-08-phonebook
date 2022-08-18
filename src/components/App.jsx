@@ -58,7 +58,6 @@ export class App extends Component {
 		const { contacts, filter } = this.state;
 		return (
 			<Container>
-				{/* <GlobalStyle /> */}
 
 				<MainTitle>Phonebook</MainTitle>
 				<ContactForm onSubmit={this.onSubmitHandler} contacts={contacts} />

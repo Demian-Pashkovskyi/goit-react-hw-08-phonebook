@@ -11,7 +11,7 @@ justify-content:${jc ? jc : "center"};
   `;
 	export const centerBlock = `
   display: block;
-  margin: 0 auto;
+  margin: 20px auto;
 `;
 
 export const block = `

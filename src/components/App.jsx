@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-// import { GlobalStyle } from "./Styled/GlobalStyle";
 import  { ContactForm } from "./ContactForm/ContactForm";
 import  { Filter } from "./FiltrContacts/FiltrContacts";
-// import { nanoid } from "nanoid";
 import  { ContactList } from "./ContactsList/ContactsList";
 import { Container, MainTitle, SubTitle } from "./Styled/App";
 
@@ -53,6 +51,23 @@ export class App extends Component {
 		}
 		return filterContact;
 	};
+
+	componentDidMount() {
+		const conactsToLocalStorage = JSON.parse(
+      localStorage.getItem('contacts')
+    );
+
+		if(conactsToLocalStorage) {
+			this.setState({ contacts: conactsToLocalStorage });
+		}
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		if(this.state.contacts !== prevState.contacts) {
+			localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+		}
+	}
+
 
 	render() {
 		const { contacts, filter } = this.state;

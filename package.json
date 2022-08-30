@@ -11,7 +11,6 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
     "formik": "^2.2.9",
-    "i": "^0.3.7",
     "modern-normalize": "^1.1.0",
     "npm": "^8.16.0",
     "prop-types": "^15.8.1",

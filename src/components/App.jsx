@@ -15,6 +15,23 @@ export class App extends Component {
 		],
 		filter: "",
 	};
+  
+  	componentDidMount() {
+		const conactsToLocalStorage = JSON.parse(
+      localStorage.getItem('contacts')
+    );
+
+		if(conactsToLocalStorage) {
+			this.setState({ contacts: conactsToLocalStorage });
+		}
+	}
+
+	componentDidUpdate(_, prevState) {
+		if(this.state.contacts !== prevState.contacts) {
+			localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+		}
+	}
+
 
 	onSubmitHandler = ({ id, name, number }) => {
 		const contact = { id, name, number };
@@ -51,23 +68,6 @@ export class App extends Component {
 		}
 		return filterContact;
 	};
-
-	componentDidMount() {
-		const conactsToLocalStorage = JSON.parse(
-      localStorage.getItem('contacts')
-    );
-
-		if(conactsToLocalStorage) {
-			this.setState({ contacts: conactsToLocalStorage });
-		}
-	}
-
-	componentDidUpdate(prevProps, prevState) {
-		if(this.state.contacts !== prevState.contacts) {
-			localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
-		}
-	}
-
 
 	render() {
 		const { contacts, filter } = this.state;

@@ -1,8 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { nanoid } from "nanoid";
 import { Button } from "../Button/Button";
-import { AddForm, Error, InputForm, LabelForm} from "./ContactFormStyled";
-import { Formik } from "formik";
+import { AddForm, Error, InputForm, LabelForm } from "./ContactFormStyled";
 import PropTypes from "prop-types";
 
 
@@ -32,17 +31,10 @@ export const ContactForm = ({ onSubmitHandler }) => {
     resetField('number');
   };
 
-	// const FormError = ({ name }) => {
-	// 	return (
-	// 		<ErrorMessage
-	// 			name={name}
-	// 			render={(message) => <Message>{message}</Message>}
-	// 		/>
-	// 	);
-	// };
+
 	return (
-		<Formik onSubmit={handleSubmit(onFormSubmit)}>
-			<AddForm autoComplete="off">
+		// <FormBox onSubmit={handleSubmit(onFormSubmit)}>
+			<AddForm autoComplete="off" onSubmit={handleSubmit(onFormSubmit)}>
 				<div>
 					<LabelForm htmlFor="name">Name</LabelForm>
 					<div>
@@ -60,7 +52,7 @@ export const ContactForm = ({ onSubmitHandler }) => {
 								},
 							})}
 						/>
-						 {errors.name?.message && <Error>{errors.name?.message}</Error>}
+						{errors.name?.message && <Error>{errors.name?.message}</Error>}
 					</div>
 				</div>
 				<div>
@@ -85,7 +77,7 @@ export const ContactForm = ({ onSubmitHandler }) => {
 				</div>
 				<Button type="submit" text={"Add contact"} />
 			</AddForm>
-		</Formik>
+		// </FormBox>
 	);
 }
 

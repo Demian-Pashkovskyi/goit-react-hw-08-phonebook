@@ -5,9 +5,8 @@ import PropTypes from "prop-types";
 export const ContactItem = ({ id, name, number, onDeleteHandler }) => {
 	return (
 		<Item>
-			<span>{name}:</span>
-			<span>{number} </span>
-			<IconButton aria-label="Delete contact" onClick={() => onDeleteHandler(id)}>
+			{name}: {number}{' '}
+			<IconButton aria-label="Delete contact" type="button" onClick={() => onDeleteHandler(id)} data-id={id}>
 			</IconButton>
 		</Item>
 	);

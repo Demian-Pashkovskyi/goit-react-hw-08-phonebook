@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import { font } from "../Styled/Mixins";
-import { Form, Field } from "formik";
+// import { Form } from "formik";
 
 
-export const AddForm = styled(Form)`
+export const AddForm = styled.form`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -56,8 +56,8 @@ export const Error = styled.p`
   color: red;
 `;
 
-export const FormBox = styled.form`
-  border: 1px solid white;
-  width: 400px;
-  padding: 24px;
-`;
+// export const FormBox = styled.form`
+//   border: 1px solid white;
+//   width: 400px;
+//   padding: 24px;
+// `;

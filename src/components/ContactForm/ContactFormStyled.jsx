@@ -21,7 +21,7 @@ display: block;
 margin-bottom: 10px;
 `;
 
-export const InputForm = styled(Field)`
+export const InputForm = styled.input`
 	border: 0;
 	outline: 0;
 	width: 100%;
@@ -46,5 +46,18 @@ export const Message = styled.p`
 
 export const SpanForm = styled.label`
 ${font({ fs: 16, fw: 700, lh: 20 })};
-	display: block;;
+display: flex;
+flex-direction: column;
+gap: 16px;
+  margin-bottom: 24px;
+`;
+
+export const Error = styled.p`
+  color: red;
+`;
+
+export const FormBox = styled.form`
+  border: 1px solid white;
+  width: 400px;
+  padding: 24px;
 `;

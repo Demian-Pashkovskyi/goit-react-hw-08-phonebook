@@ -1,95 +1,108 @@
-import { useState } from "react";
+import { useForm } from 'react-hook-form';
 import { nanoid } from "nanoid";
-import { Formik, ErrorMessage } from "formik";
-import "react-toastify/dist/ReactToastify.css";
 import { Button } from "../Button/Button";
-import { AddForm, InputForm, LabelForm, Message } from "./ContactFormStyled";
+import { AddForm, Error, InputForm, LabelForm} from "./ContactFormStyled";
+import { Formik } from "formik";
+import PropTypes from "prop-types";
 
-export const ContactForm = ({ onSubmit }) => {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
 
-  const onChangeHandler = event => {
-    const { name, value } = event.target;
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-      case 'number':
-        setNumber(value);
-        break;
-      default:
-        break;
-    }
+export const ContactForm = ({ onSubmitHandler }) => {
+  const {
+    handleSubmit,
+    watch,
+		register,
+		formState: { errors },
+    resetField,
+  } = useForm({
+    defaultValues: { name: '', number: '' },
+  });
+
+  const nameValue = watch('name');
+  const numberValue = watch('number');
+
+  const onFormSubmit = () => {
+    const newContact = {
+      id: nanoid(),
+      name: nameValue,
+      number: numberValue,
+    };
+
+    onSubmitHandler(newContact);
+    resetField('name');
+    resetField('number');
   };
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    const id = nanoid();
-    onSubmit({ id, name, number });
-    setName('');
-    setNumber('');
-  };
-
-	const FormError = ({ name }) => {
+	// const FormError = ({ name }) => {
+	// 	return (
+	// 		<ErrorMessage
+	// 			name={name}
+	// 			render={(message) => <Message>{message}</Message>}
+	// 		/>
+	// 	);
+	// };
 	return (
-		<ErrorMessage
-			name={name}
-			render={(message) => <Message>{message}</Message>}
-		/>
+		<Formik onSubmit={handleSubmit(onFormSubmit)}>
+			<AddForm autoComplete="off">
+				<div>
+					<LabelForm htmlFor="name">Name</LabelForm>
+					<div>
+						<InputForm 
+							type="text"
+							name="name"
+							value={nameValue}
+							{...register('name', {
+								required: { value: true, message: 'This field is required' },
+								pattern: {
+									value:
+										/^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/g,
+									message:
+										"Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan",
+								},
+							})}
+						/>
+						 {errors.name?.message && <Error>{errors.name?.message}</Error>}
+					</div>
+				</div>
+				<div>
+					<LabelForm htmlFor="number">Number</LabelForm>
+					<div>
+						<InputForm 
+							type="tel"
+							name="number"
+							value={numberValue}
+          {...register('number', {
+            required: { value: true, message: 'This field is required' },
+            pattern: {
+              value:
+                /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/g,
+              message:
+                'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +',
+            },
+          })}
+						/>
+						{errors.number?.message && <Error>{errors.number?.message}</Error>}
+					</div>
+				</div>
+				<Button type="submit" text={"Add contact"} />
+			</AddForm>
+		</Formik>
 	);
+}
+
+
+ContactForm.propTypes = {
+	onSubmitHandler: PropTypes.func.isRequired,
 };
 
-	return (
-					<Formik  onSubmit={handleSubmit}>
-						<AddForm autoComplete="off">
-							<div>
-								<LabelForm htmlFor="name">Name</LabelForm>
-								<div>
-									<InputForm
-										type="text"
-										name="name"
-										onChange={onChangeHandler}
-										pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-										title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-										required
-									/>
-									<FormError name="name" />
-								</div>
-							</div>
-							<div>
-								<LabelForm htmlFor="number">Number</LabelForm>
-								<div>
-									<InputForm
-										type="tel"
-										name="number"
-										onChange={onChangeHandler}
-										pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-										title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-										required
-									/>
-									<FormError name="number" />
-								</div>
-							</div>
-							<Button type="submit" text={"Add contact"} />
-						</AddForm>
-					</Formik>
-				);
-			}
+
+
 
 // const initialValues = {
 // 	name: "",
 // 	number: "",
 // };
 
-// const FormError = ({ name }) => {
-// 	return (
-// 		<ErrorMessage
-// 			name={name}
-// 			render={(message) => <Message>{message}</Message>}
-// 		/>
-// 	);
-// };
+
 
 // export class ContactForm extends Component {
 // 	handleSubmit = ({ name, number }, { resetForm }) => {
@@ -107,7 +120,7 @@ export const ContactForm = ({ onSubmit }) => {
 
 // 	render() {
 // 		return (
-// 			<Formik initialValues={initialValues} onSubmit={this.handleSubmit}>
+// 			<Form onSubmit={this.handleSubmit(onFormSubmit)}>
 // 				<AddForm autoComplete="off">
 // 					<div>
 // 						<LabelForm htmlFor="name">Name</LabelForm>
@@ -137,12 +150,11 @@ export const ContactForm = ({ onSubmit }) => {
 // 					</div>
 // 					<Button type="submit" text={"Add contact"} />
 // 				</AddForm>
-// 			</Formik>
+// 			</Form>
 // 		);
 // 	}
 // }
 
 // ContactForm.propTypes = {
-// 	onSubmit: propTypes.func.isRequired,
-// 	contacts: propTypes.arrayOf(propTypes.object).isRequired,
+// 	onSubmitHandler: propTypes.func.isRequired,
 // };

@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { font } from "../Styled/Mixins";
-// import { Form } from "formik";
+
 
 
 export const AddForm = styled.form`
@@ -56,8 +56,3 @@ export const Error = styled.p`
   color: red;
 `;
 
-// export const FormBox = styled.form`
-//   border: 1px solid white;
-//   width: 400px;
-//   padding: 24px;
-// `;

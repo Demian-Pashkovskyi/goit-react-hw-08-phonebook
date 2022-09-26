@@ -15,12 +15,13 @@ export const Filter = () => {
   };
 
 	return (
-		<FilterWrapper>
+	<FilterWrapper>
 			<LabelForm>
 				<span>Find contacts by name</span>
 				<Controller
 					render={({ field }) => (
-						<FilterInput {...field} onChange={onInputChange} value={filter} />
+						<FilterInput {...field} onChange={onInputChange} 
+						value={filter} />
 					)}
 					name="filter"
 					control={control}

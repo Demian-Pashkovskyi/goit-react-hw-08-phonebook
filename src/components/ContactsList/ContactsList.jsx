@@ -1,28 +1,26 @@
+import { useSelector } from 'react-redux';
 import { List } from "./ContactsListStyled";
 import { ContactItem } from "../ContactItem/ContactItem";
-import PropTypes from "prop-types";
+import { selectContactsFilter, selectContactsItems } from 'redux/AppSlice';
 
-export const ContactList = ({ contacts, onDeleteHandler }) => (
-  <List>
-    {contacts.length ? (
-      contacts.map(({ id, name, number }) => (
-        <ContactItem
-          key={id}
-          name={name}
-          number={number}
-          onDeleteHandler={onDeleteHandler}
-          id={id}
-        />
-      ))
-    ): (
-      <li>No contacts</li>
-    )
-	}
-  </List>
-);
 
-ContactList.propTypes = {
-	contacts: PropTypes.array.isRequired,
-	onDeleteHandler: PropTypes.func.isRequired,
+export const ContactList = () => {
+  const contacts = useSelector(selectContactsItems);
+  const filter = useSelector(selectContactsFilter);
+  const filteredContacts = contacts.filter(({ name }) =>
+    name.toLowerCase().includes(filter)
+  );
+
+  return (
+    <List>
+      {filteredContacts.length ? (
+        filteredContacts.map(({ id, name, number }) => (
+          <ContactItem key={id} id={id} name={name} number={number} />
+        ))
+      ) : (
+        <li>No contacts</li>
+      )}
+    </List>
+  );
 };
 

@@ -10,16 +10,17 @@ const initialState = {
 };
 
 export const phonebookSlice = createSlice({
-  name: "phonebook",
-	initialState,
+  name: 'phonebook',
+  initialState,
   reducers: {
     addContact: (state, action) => {
-      state.push(action.payload);
+      state.contacts.items.push(action.payload);
     },
-    // deleteTask(state, action) {
-    //   const index = state.findIndex(task => task.id === action.payload);
-    //   state.splice(index, 1);
-    // },
+    removeContact: (state, action) => {
+      state.contacts.items = state.contacts.items.filter(
+        ({ id }) => id !== action.payload
+      );
+    },
     addFilter: (state, action) => {
       state.contacts.filter = action.payload.toLowerCase();
     },
@@ -31,13 +32,12 @@ const persistConfig = {
   storage,
   whitelist: ['contacts'],
 };
-
 export const persistedReducer = persistReducer(
   persistConfig,
   phonebookSlice.reducer
 );
 
-export const { addContact, addFilter} = phonebookSlice.actions;
- 
-// export const selectContactsItems = state => state.phonebook.contacts.items;
+export const { addContact, removeContact, addFilter } = phonebookSlice.actions;
+
+export const selectContactsItems = state => state.phonebook.contacts.items;
 export const selectContactsFilter = state => state.phonebook.contacts.filter;

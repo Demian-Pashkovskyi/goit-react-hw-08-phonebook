@@ -15,7 +15,6 @@ export const ContactItem = ({ id, name, number }) => {
     <Item>
       {name}: {number}{' '}
       <IconButton type="button" onClick={() => deleteContact(id)} data-id={id} aria-label="Delete contact">
-        Delete
       </IconButton>
     </Item>
   );

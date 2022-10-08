@@ -1,14 +1,18 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { addContact, selectContactsItems } from 'redux/AppSlice';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { nanoid } from "nanoid";
+import {
+  useCreateContactMutation,
+  useGetContactsQuery,
+} from 'redux/contactsSlice';
+import { toast } from 'react-toastify';
+// import { Audio } from 'react-loader-spinner';
 import { Button } from "../Button/Button";
-import { AddForm, Error, InputForm, LabelForm } from "./ContactFormStyled";
-
+import { LabelForm, AddForm, Error, InputForm } from './ContactFormStyled';
 
 export const ContactForm = () => {
-  const contacts = useSelector(selectContactsItems);
-  const dispatch = useDispatch();
+  const { data: contacts } = useGetContactsQuery();
+  const [createContact, { isLoading, isSuccess, isError }] =
+    useCreateContactMutation();
   const {
     register,
     handleSubmit,
@@ -23,9 +27,11 @@ export const ContactForm = () => {
 
   const handleNewContact = newContact => {
     if (!hasDuplicates(newContact.name)) {
-      dispatch(addContact(newContact));
+      createContact(newContact);
+      resetField('name');
+      resetField('number');
     } else {
-      alert(`${newContact.name} is already in contacts.`);
+      toast.warn(`${newContact.name} is already in contacts.`);
     }
   };
 
@@ -35,18 +41,26 @@ export const ContactForm = () => {
 
   const onFormSubmit = () => {
     const newContact = {
-      id: nanoid(),
       name: nameValue,
       number: numberValue,
     };
 
     handleNewContact(newContact);
-    resetField('name');
-    resetField('number');
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success('Contact added');
+    }
+
+    if (isError) {
+      toast.error('Oops!! Something went wrong!');
+    }
+  }, [isSuccess, isError]);
 
   return (
 		<AddForm autoComplete="off" onSubmit={handleSubmit(onFormSubmit)}>
+			{isLoading}
 			<div>
 				<LabelForm htmlFor="name">Name</LabelForm>
 				<div>

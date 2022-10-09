@@ -1,13 +1,15 @@
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Oval } from 'react-loader-spinner';
-import { FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
+import { FaRegTrashAlt } from 'react-icons/fa';
 import { Item, IconButton  } from './ContactItemStyled';
 import { Box } from '../Styled/Box';
-import { useDeleteContactByIdMutation } from 'redux/contactsSlice';
+import {
+  useDeleteContactByIdMutation
+} from 'redux/contactsSlice';
 import { toast } from 'react-toastify';
 
-export const ContactItem = ({ id, name, number, openModal }) => {
+export const ContactItem = ({ id, name, number }) => {
   const [deleteContact, { isSuccess, isLoading, isError }] =
     useDeleteContactByIdMutation();
 
@@ -21,20 +23,13 @@ export const ContactItem = ({ id, name, number, openModal }) => {
     }
   }, [isSuccess, isError]);
 
-  return (
+	return (
     <>
       <Box display="flex" justifyContent="space-between" gridGap="10px">
         <Item>
           {name}: {number}
         </Item>
-          <IconButton 
-            type="button"
-            onClick={() => {
-              openModal(id);
-            }}
-          >
-            <FaRegEdit color="blue" />
-          </IconButton>
+        <Box display="flex" gridGap="10px">
           <IconButton
             type="button"
             onClick={() => deleteContact(id)}
@@ -55,10 +50,12 @@ export const ContactItem = ({ id, name, number, openModal }) => {
               <FaRegTrashAlt color="red" />
             )}
           </IconButton>
+        </Box>
       </Box>
     </>
   );
 };
+
 
 ContactItem.propType = {
   id: PropTypes.string.isRequired,

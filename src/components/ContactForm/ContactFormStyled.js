@@ -8,9 +8,8 @@ export const AddForm = styled.form`
 	flex-direction: column;
 	justify-content: space-between;
 	max-width: 400px;
-	height: 240px;
 	padding: 20px;
-	border-radius: 20px;
+	border-radius: 10px;
 	background-color: rgb(227, 227, 238);
 	box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.22), 0px 2px 2px rgba(0, 0, 0, 0.24), 0px 2px 1px rgba(0, 0, 0, 0.32);
 `;
@@ -26,7 +25,7 @@ export const InputForm = styled.input`
 	outline: 0;
 	width: 100%;
 	margin-bottom: 10px;
-	border-radius: 20px;
+	border-radius: 10px;
 	padding: 10px;
 	background-color: #ebedf3;
 	${font({ fs: 16, fw: 400, lh: 20 })};

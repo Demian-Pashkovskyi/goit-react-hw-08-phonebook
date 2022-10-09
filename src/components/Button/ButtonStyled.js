@@ -5,7 +5,7 @@ export const AddButton = styled.button`
   padding: 10px 20px;
   margin: 0 auto;
   max-width: 100%;
-  border-radius: 20px;
+  border-radius: 10px;
   ${font({ fs: 16, fw: 600, lh: 20 })};
   background-color: #ebedf3;
   color: #008b8b;
@@ -18,7 +18,7 @@ export const AddButton = styled.button`
 export const DelButton = styled.button`
   padding: 10px;
   min-width: 40px;
-  border-radius: 20px;
+  border-radius: 10px;
   background-color: #ebedf3;
 	color: #008000;
   fill: #ff0000;

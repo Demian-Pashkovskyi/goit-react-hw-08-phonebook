@@ -2,16 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { App } from 'components/App';
 import './index.css';
-import { PersistGate } from 'redux-persist/integration/react';
-import { store, persistor } from './redux/store';
+import { store } from './redux/store';
 import { Provider } from "react-redux";
+import { ThemeProvider } from 'styled-components';
+import { theme } from './components/Styled/theme';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-		<Provider store={store}>
-			<PersistGate loading={<div>Loading...</div>} persistor={persistor}>
-    		<App />
-			</PersistGate>
-		</Provider>
+		<ThemeProvider theme={theme}>
+			<Provider store={store}>
+				<App />
+			</Provider>
+		</ThemeProvider>
   </React.StrictMode>
 );

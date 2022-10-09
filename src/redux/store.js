@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from '@reduxjs/toolkit';
 import { phonebookReducer } from 'redux/AppSlice';
-import { contactsApi } from 'services/contactsApi';
+import { contactsApi } from 'redux/contactsSlice';
 
 const rootReducer = combineReducers({
   phonebook: phonebookReducer,

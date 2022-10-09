@@ -1,6 +1,14 @@
 import styled from '@emotion/styled';
 import { font } from "../Styled/Mixins";
 
+export const LabelForm = styled.label`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+  width: 400px;
+`;
+
 export const FilterInput = styled.input`
 	border: 0;
 	outline: 0;
